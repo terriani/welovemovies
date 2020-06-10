@@ -1,0 +1,5 @@
+composer.phar
+/vendor/
+node_modules/
+Config/Cache/!.gitignore
+Public/uploaded/!index.php

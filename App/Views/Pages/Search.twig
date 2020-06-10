@@ -1,0 +1,158 @@
+<div id='Search'>
+    <div class='container-fluid'>
+        {# View gerada automaticamente via Scooby_CLI 08-06-20 - 12:04:pm #}
+        {% if msg %}
+        {{ msg|raw }}
+        {% endif %}
+
+        <script>
+            let y = 0
+        </script>
+        <main>
+            {% if statusLog == false %}
+            <nav id="menu">
+                <div class="nav-wrapper black z-depth-3">
+                    <div class="container">
+                        <a class="brand-logo" href="{{ base_url }}"><i class="material-icons red-text"
+                                style="font-size: 40pt !important;">change_history</i></a>
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                                class="material-icons red-text">menu</i></a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="{{ base_url }}register">Cadastre-se</a></li>
+                            <li><a href="{{ base_url }}login" class="btn red darken-3">Login</a></li>
+                        </ul>
+                        <a href="javascript:window.history.back()"><i class="material-icons red-text right"
+                                style="font-size: 25pt; margin-right:20px">arrow_back</i></a>
+                    </div>
+                </div>
+            </nav>
+            <ul class="sidenav black" id="mobile-demo" style="z-index: 1000000 !important;">
+                <span><i class="material-icons red-text"
+                        style="font-size: 80pt !important; margin: 20px 20px">change_history</i></span>
+                <li><a href="{{ base_url }}login" class=" white-text">Login</a></li>
+                <li><a href="{{ base_url }}register" class=" white-text">Cadastro</a></li>
+            </ul>
+
+            {% else %}
+            <nav id="menu">
+                <div class="nav-wrapper black z-depth-3">
+                    <div class="container">
+                        <a class="brand-logo" href="{{ base_url }}dashboard"><i class="material-icons red-text"
+                                style="font-size: 40pt !important;">change_history</i></a>
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                                class="material-icons red-text text-lighten-1">menu</i></a>
+                        <ul class="right hide-on-med-and-down">
+                            <li><a href="{{ base_url }}watch">Assistir</a></li>
+                            <li><a href="{{ base_url }}watched">Assistidos</a></li>
+                            <li><a href="{{ base_url }}dashboard" class="red-text">DASHBOARD</a></li>
+                            <li><a href="{{ base_url }}exit" class="btn red darken-3" onclick="
+                                                    localStorage.setItem('token', 0)
+                                                    window.location.href='{{ base_url }}exit'
+                                                ">Logout</a></li>
+                        </ul>
+                        <a href="{{ base_url }}alter-user"><i class="material-icons red-text right"
+                                style="font-size: 25pt; margin-right:20px">person_outline</i></a>
+                        <a href="javascript:window.history.back()"><i class="material-icons red-text right"
+                                style="font-size: 25pt; margin-right:20px">arrow_back</i></a>
+                    </div>
+                </div>
+            </nav>
+
+            <ul class="sidenav black" id="mobile-demo" style="z-index: 1000000 !important;">
+                <span><i class="material-icons red-text"
+                        style="font-size: 80pt !important; margin: 20px 20px">change_history</i></span>
+                <li><a href="{{ base_url }}watch" class="white-text">Assistir</a></li>
+                <li><a href="{{ base_url }}watched" class="white-text">Assistidos</a></li>
+                <li><a href="{{ base_url }}dashboard" class="red-text">DASHBOARD</a></li>
+                <li><a href="{{ base_url }}exit" class="btn red darken-3" onclick="
+                                        localStorage.setItem('token', 0)
+                                        window.location.href='{{ base_url }}exit'
+                                    ">Logout</a></li>
+            </ul>
+
+            {% endif %}
+
+            <div class="navbar-fixed" style="z-index: 1000000 !important;">
+                <nav>
+                    <div class="nav-wrapper grey darken-4 z-depth-0 search">
+                        <form action="{{ base_url }}search" method="get">
+                            <div class="input-field">
+                                <input id="search" type="search" name="name" placeholder=" Digite um filme" required>
+                                <label class="label-icon" for="search"><i
+                                        class="material-icons left white-text">search</i>
+                                </label>
+                                <i class="material-icons">close</i>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </div>
+
+            <div class="back-img" style="z-index: 999 !important;">
+                <div class="row img">
+                </div>
+                <br><br><br>
+            </div>
+    </div>
+    </main>
+    <br><br><br>
+    <footer>
+
+    </footer>
+    <script>
+        $('document').ready(() => {
+            let name = document.URL.split('=')
+            $.ajax({
+                url: 'http://meuteste.com.br/search-film/' + name[1],
+                method: 'GET',
+                success: (data) => {
+                    for (var i = 0; i < 20; i++) {
+                        if (data['results'][i]['backdrop_path'] != null && data['results'][i]['overview'] != '') {
+                            let newDate = data['results'][i]['release_date'].split('-')
+                            let date = newDate[2] + '/' + newDate[1] + '/' + newDate[0]
+                            let id_card = data['results'][i]['id']
+                            if (localStorage.getItem('token') == 1) {
+                                $('.img').append('<li div class= "col s12 m12 l6" ><div class="card card-id-' + data['results'][i]['id'] + '"><div class="card-image"><img src="https://image.tmdb.org/t/p/original/' + data['results'][i]['backdrop_path'] + '" class="img-cover"><img src="https://image.tmdb.org/t/p/w200/' + data['results'][i]['poster_path'] + '" class="poster-img"><span class="card-title white-text"><strong>' + data['results'][i]['title'] + '</strong></span></div><div class="card-content card-content-id-' + id_card + '"><p> <div class="genres red-text text-lighten-1"><strong>' + data['results'][i]['genre_ids'] + '</strong></div><br><span class="grey-text text-lighten-3">Titulo original - <strong>' + data.results[i]['original_title'] + '</strong><br><span class="white-text">Ano de lançamento <strong>' + date + '</strong><br>País de origem - <strong>' + data['results'][i]['original_language'] + '</strong><br>Votos coletados - <strong>' + data['results'][i]['vote_count'] + '</strong><br>Nota TMDB - <strong>' + data['results'][i]['vote_average'] + '</strong> | Popularidade - <strong>' + data['results'][i]['popularity'] + '</p><a href="http://meuteste.com.br/loged-film/' + data['results'][i]['id'] + '" class="filmDetail yellow-text text-darken-3">Veja Mais sobre este filme...</a></div></div></li>')
+                            } else {
+                                $('.img').append('<li div class= "col s12 m12 l6" ><div class="card card-id-' + data['results'][i]['id'] + '"><div class="card-image"><img src="https://image.tmdb.org/t/p/original/' + data['results'][i]['backdrop_path'] + '" class="img-cover"><img src="https://image.tmdb.org/t/p/w200/' + data['results'][i]['poster_path'] + '" class="poster-img"><span class="card-title white-text"><strong>' + data['results'][i]['title'] + '</strong></span></div><div class="card-content card-content-id-' + id_card + '"><p> <div class="genres red-text text-lighten-1"><strong>' + data['results'][i]['genre_ids'] + '</strong></div><br><span class="grey-text text-lighten-3">Titulo original - <strong>' + data.results[i]['original_title'] + '</strong><br><span class="white-text">Ano de lançamento <strong>' + date + '</strong><br>País de origem - <strong>' + data['results'][i]['original_language'] + '</strong><br>Votos coletados - <strong>' + data['results'][i]['vote_count'] + '</strong><br>Nota TMDB - <strong>' + data['results'][i]['vote_average'] + '</strong> | Popularidade - <strong>' + data['results'][i]['popularity'] + '</p><a href="http://meuteste.com.br/film/' + data['results'][i]['id'] + '" class="filmDetail yellow-text text-darken-3">Veja Mais sobre este filme...</a></div></div></li>')
+                            }
+                            $('.card-content-id-' + id_card).css('background', 'rgba(0,0,0,.85)')
+                            $('.card-content-id-' + id_card).css('position', 'absolute')
+                            $('.card-content-id-' + id_card).css('z-index', '1000')
+                            $('.card-content-id-' + id_card).css('top', '0')
+                            if (window.innerWidth > 960) {
+                                $('.card-content-id-' + id_card).css('height', '60vh')
+                                $('.card-content-id-' + id_card).css('margin-left', '-11px')
+                                $('.card-content-id-' + id_card).css('width', 'calc(50vw + 1px)')
+                            } else {
+                                $('.card-content-id-' + id_card).css('height', '105%')
+                                $('.card-content-id-' + id_card).css('margin-left', '-11px')
+                                $('.card-content-id-' + id_card).css('width', '100vw')
+                            }
+                            $('.card-content-id-' + id_card).css('border-radius', '0 !important')
+                            $('.card-content-id-' + id_card).css('color', 'white !important')
+                            $('.card-content-id-' + id_card).css('transition', '.5s')
+                            $('.card-content-id-' + id_card).css('display', 'none')
+                            $('.card-action-id-' + id_card).css('display', 'none')
+                            $('.card-action-id-' + id_card).css('margin-top', '-40px')
+                            $('.card-id-' + data['results'][i]['id']).hover(() => {
+                                $('.card-content-id-' + id_card).css('display', 'block')
+                                $('.card-content-id-' + id_card).css('transition', '.5s')
+                            }, () => {
+                                $('.card-content-id-' + id_card).css('display', 'none')
+                                $('.card-content-id-' + id_card).css('transition', '.5s')
+                            })
+
+                        }
+                    }
+                },
+                error: (data) => {
+                    console.log('error')
+                }
+            })
+
+        })
+
+    </script>
+</div>
+</div>

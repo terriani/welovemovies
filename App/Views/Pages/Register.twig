@@ -1,0 +1,56 @@
+{# View gerada automaticamente Via Scooby_CLI em 06-06-20 - 11:57:am #}
+<div class="container-fluid">
+    {% if msg %}
+    {{ msg|raw }}
+    {% endif %}
+    <nav id="menu">
+        <div class="nav-wrapper black z-depth-3">
+            <div class="container">
+                <a class="brand-logo" href="{{ base_url }}"><i class="material-icons red-text"
+                        style="font-size: 40pt !important;">change_history</i></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                        class="material-icons red-text">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ base_url }}login" class="btn red">Login</a></li>
+                </ul>
+                <a href="javascript:window.history.back()"><i class="material-icons red-text right"
+                        style="font-size: 25pt; margin-right:20px">arrow_back</i></a>
+            </div>
+        </div>
+    </nav>
+    <ul class="sidenav black" id="mobile-demo" style="z-index: 1000000 !important;">
+        <span><i class="material-icons red-text"
+                style="font-size: 80pt !important; margin: 20px 20px">change_history</i></span>
+        <li><a href="{{ base_url }}login" class=" white-text btn red">Login</a></li>
+    </ul>
+    <div class="login">
+        <h2 class="center red-text">Cadastre-se</h2>
+        <div class="container">
+            <div class="row">
+                <form action="{{ base_url }}new-user" method="POST" class="col s12" id="register-form">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix red-text">account_circle</i>
+                            <input id="icon_prefix" type="text" class="validate white-text" name="name">
+                            <label for="icon_prefix">Nome</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix red-text">mail</i>
+                            <input id="icon_prefix" type="email" class="validate white-text" name="email">
+                            <label for="icon_prefix">Email</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix red-text">lock_outline</i>
+                            <input id="icon_telephone" type="password" class="validate white-text" name="pass">
+                            <label for="icon_telephone">Password</label>
+                        </div>
+                    </div>
+                    <button class="btn right transparent" type="submit" name="action">
+                        <i class="material-icons right red-text" style="font-size: 40pt;">arrow_forward</i>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <br><br><br>
+    </div>
+</div>

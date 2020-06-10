@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="{{ assets }}css/film-detail.css">
+<script src="{{ assets }}js/scooby.js"></script>
+<div id='Film'>
+    <div class='container'>
+        {# View gerada automaticamente via Scooby_CLI 07-06-20 - 00:36:am #}
+        {% if msg %}
+        {{ msg|raw }}
+        {% endif %}
+    </div>
+    {% if statusLog == false %}
+    <nav id="menu">
+        <div class="nav-wrapper black z-depth-3">
+            <div class="container">
+                <a class="brand-logo" href="{{ base_url }}"><i class="material-icons red-text"
+                        style="font-size: 40pt !important;">change_history</i></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                        class="material-icons red-text">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ base_url }}register">Cadastre-se</a></li>
+                    <li><a href="{{ base_url }}login" class="btn red darken-3">Login</a></li>
+                </ul>
+                <a href="javascript:window.history.back()"><i class="material-icons red-text right"
+                        style="font-size: 25pt; margin-right:20px">arrow_back</i></a>
+            </div>
+        </div>
+    </nav>
+    <ul class="sidenav black" id="mobile-demo" style="z-index: 1000000 !important;">
+        <span><i class="material-icons red-text"
+                style="font-size: 80pt !important; margin: 20px 20px">change_history</i></span>
+        <li><a href="{{ base_url }}login" class=" white-text">Login</a></li>
+        <li><a href="{{ base_url }}register" class=" white-text">Cadastro</a></li>
+    </ul>
+
+    {% else %}
+    <nav id="menu">
+        <div class="nav-wrapper black z-depth-3">
+            <div class="container">
+                <a class="brand-logo" href="{{ base_url }}dashboard"><i class="material-icons red-text"
+                        style="font-size: 40pt !important;">change_history</i></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i
+                        class="material-icons red-text text-lighten-1">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="{{ base_url }}watch">Assistir</a></li>
+                    <li><a href="{{ base_url }}watched">Assistidos</a></li>
+                    <li><a href="{{ base_url }}exit" class="btn red darken-3" onclick="
+                                                        localStorage.setItem('token', 0)
+                                                        window.location.href='{{ base_url }}exit'
+                                                    ">Logout</a></li>
+                </ul>
+                <a href="javascript:window.history.back()"><i class="material-icons red-text right"
+                        style="font-size: 25pt; margin-right:20px">arrow_back</i></a>
+            </div>
+        </div>
+    </nav>
+
+    <ul class="sidenav black" id="mobile-demo" style="z-index: 1000000 !important;">
+        <span><i class="material-icons red-text"
+                style="font-size: 80pt !important; margin: 20px 20px">change_history</i></span>
+        <li><a href="{{ base_url }}watch" class="white-text">Assistir</a></li>
+        <li><a href="{{ base_url }}watched" class="white-text">Assistidos</a></li>
+        <li><a href="{{ base_url }}exit" class="btn red darken-3" onclick="
+                                            localStorage.setItem('token', 0)
+                                            window.location.href='{{ base_url }}exit'
+                                        ">Logout</a></li>
+    </ul>
+    {% endif %}
+
+    <div class="film-detail-body">
+        <br><br>
+        <div class="back-img" style="z-index: 999 !important;">
+            <div class="row img">
+            </div>
+        </div>
+        <br><br><br>
+        <script>
+            id = document.URL.split('/')
+            $.ajax({
+                url: 'http://meuteste.com.br/view-detail/' + id[4],
+                method: 'GET',
+                success: (data) => {
+                    console.log(data['imdb_id'])
+                    if (data['backdrop_path'] != '') {
+                        let newDate = data['release_date'].split('-')
+                        let date = newDate[2] + '/' + newDate[1] + '/' + newDate[0]
+                        if (data['videos']['results'] != '') {
+                            $('.img').append('<li div class= "col s12 m12 film-detail-card" ><div class="card"><div class="card-image-detail"><img src="https://image.tmdb.org/t/p/original/' + data['backdrop_path'] + '" class="img-cover"></div><div class="poster"><img src="https://image.tmdb.org/t/p/w200/' + data['poster_path'] + '" class="poster-img"></div><div class="container"><span class="card-title"><br><strong><h3 class="title red-text">' + data['title'] + '</h3></strong></span><div class="content"><div class="col s12 m12 l6 right"><div class="card-content-film"><p> <div class="genres red-text text-lighten-1"><strong>' + data['genres'] + '</strong></div><br><span class="grey-text text-lighten-3">Titulo original - <strong>' + data['original_title'] + '</strong><br><span class="grey-text text-lighten-3">Ano de lançamento - <strong>' + date + '</strong><br>País de origem - <strong>' + data['original_language'] + '</strong><br>Votos coletados - <strong>' + data['vote_count'] + '</strong><br>Nota TMDB - <strong>' + data['vote_average'] + '</strong> | Popularidade - <strong>' + data['popularity'] + '</strong></p><a href="https://www.youtube.com/watch?v=' + data['videos']['results'][0]['key'] + '" class="btn red" target="_blank">Ver Trailer</a></div></div><div class="col s12 m12 l6 left"><div class="card-action-film"><span class="filmDetail grey-text text-lighten-3"><h3>Sinópse</h3><br>' + data['overview'] + '</span></div></div></div></div></div></li>')
+                        } else {
+                            $('.img').append('<li div class= "col s12 m12 film-detail-card" ><div class="card"><div class="card-image-detail"><img src="https://image.tmdb.org/t/p/original/' + data['backdrop_path'] + '" class="img-cover"></div><div class="poster"><img src="https://image.tmdb.org/t/p/w200/' + data['poster_path'] + '" class="poster-img"></div><div class="container"><span class="card-title"><br><strong><h3 class="title red-text">' + data['title'] + '</h3></strong></span><div class="content"><div class="col s12 m12 l6 right"><div class="card-content-film"><p> <div class="genres red-text text-lighten-1"><strong>' + data['genres'] + '</strong></div><br><span class="grey-text text-lighten-3">Titulo original - <strong>' + data['original_title'] + '</strong><br><span class="grey-text text-lighten-3">Ano de lançamento - <strong>' + date + '</strong><br>País de origem - <strong>' + data['original_language'] + '</strong><br>Votos coletados - <strong>' + data['vote_count'] + '</strong><br>Nota TMDB - <strong>' + data['vote_average'] + '</strong> | Popularidade - <strong>' + data['popularity'] + '</strong></p></div></div><div class="col s12 m12 l6 left"><div class="card-action-film"><span class="filmDetail grey-text text-lighten-3"><h3>Sinópse</h3><br>' + data['overview'] + '</span></div></div></div></div></div></li>')
+
+                        }
+                    }
+                },
+                error: (data) => {
+                    console.log('error')
+                }
+            })
+
+        </script>

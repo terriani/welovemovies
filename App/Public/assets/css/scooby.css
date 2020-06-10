@@ -1,0 +1,208 @@
+html {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 0;
+}
+
+.iziToast-wrapper{
+    z-index: 100000000000 !important;
+}
+
+li {
+    list-style-type: armenian !important;
+    color: transparent !important;
+}
+
+#menu{
+  position: absolute;
+  bottom: 0;
+  z-index: 1000000 !important;
+  position: fixed;
+  display: block;
+}
+
+nav {
+  position: fixed;
+  z-index: 10000 !important;
+  background-color: black;
+}
+
+.user-view {
+  height: 140px;
+}
+
+body {
+  background-color: #000;
+  color: #e9e9e9;
+  overflow-x: hidden !important;
+  min-height: 100vh;
+}
+
+.card-title{
+    padding: 5px !important;
+    background-color: rgba(0,0,0,.8);
+    margin-left: 130px;
+    padding-right: 15px !important;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 1000 !important;
+}
+
+.poster-img{
+    margin-left: 10px;
+    width: 110px !important;
+    margin-top: -180px !important;
+    box-shadow: 0 0 20px black;
+
+}
+
+.img-cover{
+  margin-left: -10px !important;
+  width: 50vw !important;
+  height: 60vh !important;
+  margin-top: 49px !important;
+  border-radius: 0 !important;
+
+}
+
+.genres{
+    color: #333;
+}
+
+.filmDetail{
+    cursor: pointer;
+}
+
+.card{
+  height: 100% !important;
+  max-height: 340px !important;
+  margin: -5px !important;
+  width: 105% !important;
+  border-radius: 0 !important;
+  background-color: transparent !important;
+  box-shadow: 0 0 0 transparent !important;
+}
+
+.film-detail-card{
+  width: 100vw;
+  margin-left: -10px !important;
+}
+
+.card-content-film, .card-action-film{
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 50px;
+}
+
+.card-content-film{
+  border-left: 1px solid #ccc;
+  width: 70%;
+  padding-bottom: 15px;
+  padding-top: 15px;
+  margin-top: 70px !important;
+}
+
+.film-detail-body{
+  background-color: black;
+}
+
+.tabs{
+  position: fixed;
+  height: 55px !important;
+  margin-top: -13px;
+  margin-bottom: -10px;
+  z-index: 10000 !important;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #000;
+}
+::-webkit-scrollbar {
+    height: 2px;
+    width: 5px;
+}
+::-webkit-scrollbar-thumb {
+    background: crimson;
+}
+
+.tabs{
+  margin-top: -25px;
+}
+
+.back-img{
+  margin-top: -20px;
+}
+
+.splash-icon{
+    animation-name: splash;
+    animation-duration: 4s;
+    transition: ease-out;
+}
+
+.dropdown-content li > a, .dropdown-content li > span {
+    color: tomato !important;
+}
+
+.select-dropdown{
+    color: #ddd !important;
+}
+
+
+@-webkit-keyframes splash {
+    from {
+        opacity: 1;
+        font-size: 0;
+    }
+    to {
+        opacity: 0;
+        font-size: 5000pt;
+    }
+}
+
+@media screen and (max-width: 980px) {
+  .img-cover{
+    margin-left: -10px !important;
+    width: 100vw !important;
+    height: 40vh !important;
+    margin-top: 0px !important;
+    border-radius: 0 !important;
+  }
+  .poster-img{
+    margin-left: 10px;
+    width: 110px !important;
+    margin-top: -180px !important;
+    box-shadow: 0 0 20px black;
+  }
+
+@-webkit-keyframes splash {
+    from {
+        opacity: 1;
+        font-size: 0;
+    }
+    to {
+        opacity: 0;
+        font-size: 2000pt;
+    }
+}
+
+}
+
+@media screen and (max-width: 980px) and (orientation: landscape){
+  .img-cover{
+    margin-left: -10px !important;
+    width: 100vw !important;
+    height: 60vh !important;
+    margin-top: 0px !important;
+    border-radius: 0 !important;
+  }
+  .poster-img{
+    margin-left: 10px;
+    width: 110px !important;
+    margin-top: -180px !important;
+    box-shadow: 0 0 20px black;
+  }
+
+}
+
+

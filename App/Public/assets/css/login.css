@@ -1,0 +1,35 @@
+html{
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+#menu{
+  position: absolute;
+  bottom: 0;
+  z-index: 1000000 !important;
+  position: fixed;
+  display: block;
+}
+
+nav {
+  position: fixed;
+  z-index: 10000 !important;
+  background-color: black;
+}
+
+.login{
+    margin-top: 0 !important;
+}
+
+@media screen and (max-width: 640px) and (orientation:portrait) {
+    .login{
+       margin-top: 40%;
+    }
+}
+
+@media screen and (max-width: 980px) and (orientation:landscape) {
+    .login{
+       margin-top: 0%;
+    }
+}
