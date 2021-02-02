@@ -5,7 +5,7 @@
 	"description" : "Um framework MVC feito com PHP e muito amor para tornar o desnvolvimento web muito mais simples e divertido",
     "require":{
         "twig/twig": "^2.11",
-        "illuminate/database": "^5.8",
+        "illuminate/database": "^6.20",
         "larapack/dd": "^1.1",
         "matthiasmullie/minify": "1.*",
         "filp/whoops": "^2.5",
